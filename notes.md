@@ -7,3 +7,5 @@
 - We won't store data on local machine, use DataBase-as-a-Service (DBaas) called 'mLab' instead:
   - It provides us with simplicities to setup database
   - It provides us with the Graphic Interface to look around the database
+
+- Used mongodb, and integrated mongoose, an ODM (Object Database Manager) for making life easier to write tedious, error-prone and repetitive database code.
