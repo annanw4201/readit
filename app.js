@@ -38,4 +38,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// database setup
+var mongoose = require('mongoose');
+var mongoURL = 'mongodb://admin:admin123@ds129085.mlab.com:29085/readit';
+mongoose.connect(mongoURL, { useNewUrlParser: true });
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error'));
+
 module.exports = app;

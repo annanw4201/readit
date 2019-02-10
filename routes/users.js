@@ -1,9 +1,31 @@
 var express = require('express');
 var router = express.Router();
+var User = require('../models/user');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
+  User.find({}, 'username', function(err, users) {
+  	if (err) {
+  		console.error(err);
+  	}
+  	else {
+  		res.render('users/', {users: users});
+  	}
+  });
+});
+
+router.get('/newUser', function(req, res, next) {
+	res.render('users/newUser');
+});
+
+router.post('/newUser', function(req, res, next) {
+	const user = new User(req.body);
+	user.save(function(err, user) {
+		if (err) {
+			console.error('new user not working');
+		}
+		return res.redirect('/users');
+	});
 });
 
 module.exports = router;
