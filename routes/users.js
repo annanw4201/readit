@@ -19,7 +19,7 @@ router.get('/newUser', function(req, res, next) {
 	res.render('users/newUser');
 });
 
-//
+// write username into database
 router.post('/newUser', function(req, res, next) {
 	const user = new User(req.body);
 	user.save(function(err, user) {

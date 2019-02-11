@@ -14,7 +14,8 @@ var app = express();
 app.use(session({
 	secret: 'secret-unique-code', 
 	cookie: {maxAge: 3600000}, 
-	resave: true, saveUninitialized: true
+	resave: true, 
+	saveUninitialized: true
 }));
 
 // view engine setup
