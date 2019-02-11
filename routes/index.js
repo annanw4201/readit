@@ -10,8 +10,7 @@ router.use(function(req, res, next) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	var currentUserId = req.session.userId;
-	res.render('index', { title: 'readit', currentUserId });
+	res.render('index');
 });
 
 // redirect to login page
