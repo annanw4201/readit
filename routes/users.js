@@ -14,15 +14,17 @@ router.get('/', function(req, res, next) {
   });
 });
 
+// redirect to new user creation page
 router.get('/newUser', function(req, res, next) {
 	res.render('users/newUser');
 });
 
+//
 router.post('/newUser', function(req, res, next) {
 	const user = new User(req.body);
 	user.save(function(err, user) {
 		if (err) {
-			console.error('new user not working');
+			console.error('New user not working');
 		}
 		return res.redirect('/users');
 	});

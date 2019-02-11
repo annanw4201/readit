@@ -18,5 +18,27 @@ userSchema.pre('save', function(next) {
 	});
 });
 
+userSchema.statics.authenticate = function(username, password, next) {
+	User.findOne({username: username})
+	.exec(function(err, user) {
+		if (err) {
+			return next(err);
+		}
+		else if (!user) {
+			var error = new Error('User not found');
+			error.status = 401;
+			return next(error);
+		}
+		bcrypt.compare(password, user.password, function(err, result) {
+			if (result == true) {
+				return next(null, user);
+			}
+			else {
+				return next();
+			}
+		})
+	});
+};
+
 const User = mongoose.model('User', userSchema);
 module.exports = User;
