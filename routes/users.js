@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/user');
+var auth = require('./helpers/auth');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', auth.requireLogin, function(req, res, next) {
   User.find({}, 'username', function(err, users) {
   	if (err) {
   		console.error(err);
