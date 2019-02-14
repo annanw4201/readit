@@ -26,7 +26,7 @@ router.post('/login', (req, res, next) => {
 		if (err || !user) {
 			var error = new Error('Username or password incorrect!');
 			error.status = 401;
-			return next(err) ;
+			return next(error) ;
 		}
 		else {
 			req.session.userId = user._id;
