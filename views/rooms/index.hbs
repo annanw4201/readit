@@ -1,0 +1,17 @@
+<div class="row">
+	<div class="col">
+		<legend>Join Rooms</legend>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col">
+		<ul>
+			{{#each rooms as |room|}}
+				<li>
+					<a href="/rooms/{{room.id}}">{{room.topic}}</a> | <a href="/rooms/{{room.id}}/edit">edit</a>
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+</div>

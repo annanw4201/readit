@@ -5,6 +5,7 @@ var User = require('../models/user');
 router.use(function(req, res, next) {
 	res.locals.title = 'readit';
 	res.locals.currentUserId = req.session.userId;
+	res.locals.currentUsername = req.session.username;
 	next();
 });
 
@@ -20,14 +21,16 @@ router.get('/login', (req, res, next) => {
 
 // authenticating username and its matched password
 router.post('/login', (req, res, next) => {
+	console.log(req.body)
 	User.authenticate(req.body.username, req.body.password, (err, user) => {
 		if (err || !user) {
 			var error = new Error('Username or password incorrect!');
 			error.status = 401;
-			return next(error);
+			return next(err) ;
 		}
 		else {
 			req.session.userId = user._id;
+			req.session.username = user.username;
 			return res.redirect('/');
 		}
 	});
@@ -40,6 +43,7 @@ router.get('/logout', (req, res, next) => {
 			if (err){
 				return next(err);
 			}
+			res.locals.currentUserId = null;
 			return res.redirect('/login');
 		});
 	}
