@@ -21,7 +21,6 @@ router.get('/login', (req, res, next) => {
 
 // authenticating username and its matched password
 router.post('/login', (req, res, next) => {
-	console.log(req.body)
 	User.authenticate(req.body.username, req.body.password, (err, user) => {
 		if (err || !user) {
 			var error = new Error('Username or password incorrect!');
@@ -31,7 +30,7 @@ router.post('/login', (req, res, next) => {
 		else {
 			req.session.userId = user._id;
 			req.session.username = user.username;
-			return res.redirect('/');
+			return res.redirect('/rooms');
 		}
 	});
 });
