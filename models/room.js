@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 
-var RoomSchema = new mongoose.Schema({
+const RoomSchema = new mongoose.Schema({
 	topic: {type: String, required: true}
 });
 
-module.exports = mongoose.model('Room', RoomSchema);
+const Room = mongoose.model('Room', RoomSchema);
+module.exports = Room;
