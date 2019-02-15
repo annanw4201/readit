@@ -20,7 +20,6 @@ userSchema.pre('save', function(next) {
 
 userSchema.statics.authenticate = function(username, password, next) {
 	User.findOne({username: username}, function(err, user) {
-		console.log(user);
 		if (err) {
 			return next(err);
 		}

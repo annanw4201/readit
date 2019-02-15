@@ -11,7 +11,7 @@ router.get('/', (req, res, next) => {
 			console.error(err);
 		}
 		else {
-			res.render('rooms/', {rooms: rooms});
+			res.render('rooms/index', {rooms: rooms});
 		}
 	});
 });
@@ -24,17 +24,33 @@ router.get('/newRoom', auth.requireLogin, (req, res, next) => {
 
 // room show action
 router.get('/:id', auth.requireLogin, (req, res, next) => {
-
+	Room.findById(req.params.id, function(err, room) {
+		if (err) {
+			console.error(err);
+		}
+		res.render("rooms/showRoom");
+	});
 });
 
 // room edit action
 router.get('/:id/edit', auth.requireLogin, (req, res, next) => {
-
+	console.log("get id/edit");
+	Room.findById(req.params.id, function(err, room) {
+		if (err) {
+			console.error(err);
+		}
+		res.render('rooms/edit', {room: room});
+	});
 });
 
 // room update action
 router.post('/:id', auth.requireLogin, (req, res, next) => {
-
+	Room.findByIdAndUpdate(req.params.id, req.body, function(err, room) {
+		if (err) {
+			console.error(err);
+		}
+		res.redirect('/rooms/' + req.params.id);
+	});
 });
 
 // room create action
@@ -44,7 +60,7 @@ router.post('/', (req, res, next) => {
 		if (err) {
 			console.error(err);
 		}
-		return res.redirect('/rooms');
+		return res.redirect('/rooms/index');
 	});
 });
 
