@@ -5,15 +5,14 @@ var auth = require('./helpers/auth');
 var Room = require('../models/room');
 
 // post router
-var postsRouter = require('./posts');
-router.use('/:roomId/posts', postsRouter);
+var postRouter = require('./post');
+router.use('/:roomId/posts', postRouter);
 
 // post model
 var Post = require('../models/post');
 
 // room index page
 router.get('/', (req, res, next) => {
-	console.log("get rooms index page");
 	Room.find({}, 'topic', function(err, rooms) {
 		if (err) {
 			console.error(err);
@@ -26,13 +25,11 @@ router.get('/', (req, res, next) => {
 
 // room new action
 router.get('/newRoom', auth.requireLogin, (req, res, next) => {
-	console.log("go to new room page");
 	res.render('rooms/newRoom');
 });
 
 // room show action
 router.get('/:id', auth.requireLogin, (req, res, next) => {
-	console.log("get room /:id --" + req.params.id);
 	Room.findById(req.params.id, function(err, room) {
 		if (err) {
 			console.error(err);
@@ -48,7 +45,6 @@ router.get('/:id', auth.requireLogin, (req, res, next) => {
 
 // room edit action
 router.get('/:id/edit', auth.requireLogin, (req, res, next) => {
-	console.log("get room /:id/edit --" + req.params.id);
 	Room.findById(req.params.id, function(err, room) {
 		if (err) {
 			console.error(err);
@@ -59,7 +55,6 @@ router.get('/:id/edit', auth.requireLogin, (req, res, next) => {
 
 // room update action
 router.post('/:id', auth.requireLogin, (req, res, next) => {
-	console.log("post room /:id --" + req.params.id);
 	Room.findByIdAndUpdate(req.params.id, req.body, {useFindAndModify: false}, function(err, room) {
 		if (err) {
 			console.error(err);
@@ -70,7 +65,6 @@ router.post('/:id', auth.requireLogin, (req, res, next) => {
 
 // room create action
 router.post('/', auth.requireLogin, (req, res, next) => {
-	console.log("post new room");
 	var room = new Room(req.body);
 	room.save(function(err, room) {
 		if (err) {

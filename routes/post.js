@@ -4,6 +4,9 @@ const auth = require('./helpers/auth');
 const Room = require('../models/room');
 const Post = require('../models/post');
 
+const commentRouter = require('./comment');
+router.use('/:postId/comments', commentRouter);
+
 // new posts
 router.get('/newPost', auth.requireLogin, (req, res, next) => {
 	Room.findById(req.params.roomId, function(err, room) {

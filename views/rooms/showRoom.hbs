@@ -1,15 +1,26 @@
 <div>
 	<h2>Room: {{room.topic}}</h2>
-	<h6>Posts:</h4>
+	<h6>Posts:</h6>
 </div>
 
 <div class="row justify-content-center">
 	<div class="col-8">
+
 		{{#each posts as |post|}}
 		<div class="card mb-3">
 			<div class="card-body">
 				<h3 class="card-title text-center">{{post.subject}}</h3>
 				<p>{{post.body}}</p>
+			</div>
+			<div class="card-footer text-muted">
+				<ul>
+					{{#each post.comments as |comment|}}
+					<li>{{comment.body}}</li>
+					{{/each}}
+					<a href="/rooms/{{../room.id}}/posts/{{post.id}}/comments/newComment">
+						<button class="btn btn-primary" type="submit">Comment</button>
+					</a>
+				</ul>
 			</div>
 		</div>
 		{{/each}}
