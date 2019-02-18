@@ -9,3 +9,21 @@
   - It provides us with the Graphic Interface to look around the database
 
 - Used mongodb, and integrated mongoose, an ODM (Object Database Manager) for making life easier to write tedious, error-prone and repetitive database code.
+
+- Use the snippet of code as follow to tell when at this path use the specified middleware:
+```javascript
+const commentRouter = require('./comment');
+router.use('/:postId/comments', commentRouter);
+```
+- If need login status of the user, we can define a function to help us to authenticate the user status. And put this function at the second parameter of the router action.
+```javascript
+exports.requireLogin = (req, res, next) => {
+	// authenticate login status
+}
+router.get('/newPost', requireLogin, (req, res, next) => {
+  // code as follow...
+});
+```
+
+- When storing the user's information, the password specially, needed to be hashed before saving the text password into database. We use 'bcrypt' to help with this authentication.
+
