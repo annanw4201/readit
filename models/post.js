@@ -3,7 +3,8 @@ var mongoose = require('mongoose');
 const PostSchema = new mongoose.Schema({
 	subject: {type: String, required: true},
 	body: {type: String, required: true},
-	room: {type: mongoose.Schema.Types.ObjectId, ref: 'Room'}
+	room: {type: mongoose.Schema.Types.ObjectId, ref: 'Room'},
+	comments: [{type: mongoose.Schema.Types.ObjectId, ref:'Comment'}]
 });
 
 const Post = mongoose.model('Post', PostSchema);

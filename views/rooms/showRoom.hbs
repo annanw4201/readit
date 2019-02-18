@@ -1,10 +1,10 @@
 <div>
-	<h2>{{room.topic}}</h2>
+	<h2>Room: {{room.topic}}</h2>
+	<h6>Posts:</h4>
 </div>
 
 <div class="row justify-content-center">
 	<div class="col-8">
-
 		{{#each posts as |post|}}
 		<div class="card mb-3">
 			<div class="card-body">
@@ -13,7 +13,7 @@
 			</div>
 		</div>
 		{{/each}}
-		
+
 	</div>
 </div>
 

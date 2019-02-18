@@ -1,6 +1,12 @@
 <div class="row">
 	<div class="col">
 		<legend>Join Rooms</legend>
+		
+		<div class="text-right">
+			<button class="btn btn-primary verticle-align">
+				<a href="/rooms/newRoom">Create Room</a>
+			</button>
+		</div>
 	</div>
 </div>
 
@@ -8,9 +14,9 @@
 	<div class="col">
 		<ul>
 			{{#each rooms as |room|}}
-				<li>
-					<a href="/rooms/{{room.id}}">{{room.topic}}</a> | <a href="/rooms/{{room.id}}/edit">edit</a>
-				</li>
+			<li>
+				<a href="/rooms/{{room.id}}">{{room.topic}}</a> | <a href="/rooms/{{room.id}}/edit">edit</a>
+			</li>
 			{{/each}}
 		</ul>
 	</div>
