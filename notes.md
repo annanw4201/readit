@@ -18,7 +18,7 @@ router.use('/:postId/comments', commentRouter);
 - If need login status of the user, we can define a function to help us to authenticate the user status. And put this function at the second parameter of the router action.
 ```javascript
 exports.requireLogin = (req, res, next) => {
-	// authenticate login status
+  // authenticate login status
 }
 router.get('/newPost', requireLogin, (req, res, next) => {
   // code as follow...
@@ -27,3 +27,16 @@ router.get('/newPost', requireLogin, (req, res, next) => {
 
 - When storing the user's information, the password specially, needed to be hashed before saving the text password into database. We use 'bcrypt' to help with this authentication.
 
+- When need to update changes use code snippet as follow (populate the property)
+```javascript
+// need to add a reference to another document
+const PostSchema = new mongoose.Schema({
+  room: {type: mongoose.Schema.Types.ObjectId, ref: 'Room'},
+  comments: [{type: mongoose.Schema.Types.ObjectId, ref:'Comment'}]
+});
+
+Post = mongoose.model('Post', PostSchema);
+Post.find({room: room}).populate('comments').exec(function(err, posts) {
+  // code as follow...
+});
+```
