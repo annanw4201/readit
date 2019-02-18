@@ -13,14 +13,14 @@
 				<p>{{post.body}}</p>
 			</div>
 			<div class="card-footer text-muted">
-				<ul>
+				<ol>
 					{{#each post.comments as |comment|}}
-					<li>{{comment.body}}</li>
+					<li>{{comment.content}}</li>
 					{{/each}}
 					<a href="/rooms/{{../room.id}}/posts/{{post.id}}/comments/newComment">
 						<button class="btn btn-primary" type="submit">Comment</button>
 					</a>
-				</ul>
+				</ol>
 			</div>
 		</div>
 		{{/each}}

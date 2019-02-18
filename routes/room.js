@@ -34,7 +34,7 @@ router.get('/:id', auth.requireLogin, (req, res, next) => {
 		if (err) {
 			console.error(err);
 		}
-		Post.find({room: room}, function(err, posts) {
+		Post.find({room: room}).populate('comments').exec(function(err, posts) {
 			if (err) {
 				console.error(err);
 			}
