@@ -10,7 +10,7 @@ router.get('/', auth.requireLogin, function(req, res, next) {
   		console.error(err);
   	}
   	else {
-  		res.render('users/', {users: users});
+  		res.render('users/index', {users: users});
   	}
   });
 });

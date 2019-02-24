@@ -3,7 +3,7 @@ var router = express.Router();
 var User = require('../models/user');
 
 router.use(function(req, res, next) {
-	res.locals.title = 'readit';
+	res.locals.title = 'READIT';
 	res.locals.currentUserId = req.session.userId;
 	res.locals.currentUsername = req.session.username;
 	next();
