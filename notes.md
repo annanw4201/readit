@@ -40,3 +40,5 @@ Post.find({room: room}).populate('comments').exec(function(err, posts) {
   // code as follow...
 });
 ```
+
+- When add event to objects in a loop, only the last one is working because after reaching the maximum index, only the last object is added with this event. Use forEach or pass the object to another function to add the event.
