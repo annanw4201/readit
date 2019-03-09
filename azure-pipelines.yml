@@ -17,5 +17,6 @@ steps:
 
 - script: |
     npm install
+    npm install bcrypt
     npm run start
   displayName: 'npm install and start'
