@@ -41,7 +41,7 @@ router.post('/:id', auth.requireLogin, (req, res, next) => {
 		post.points += parseInt(req.body.points);
 		post.save(function(err, post) {
 			if (err) console.error(err);
-			return res.redirect(`/rooms/${post.room}`);
+			return res.json({postPoints: post.points});
 		});
 	});
 });

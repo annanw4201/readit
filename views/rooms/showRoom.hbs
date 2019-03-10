@@ -13,16 +13,16 @@
 				<h3 class="card-title text-center">{{post.subject}}</h3>
 				<p>{{post.body}}</p>
 				<div class="text-right">
-					<span class="points-span">{{post.points}} points </span>
+					<span class="points-span" id="postPoints{{post.id}}">{{post.points}} points </span>
 					<div class="btn-group btn-group=sm">
-						<form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form">
+						<form action="javascript:void(0)" class="inline-form" id="addPoints{{post.id}}">
 							<input type="hidden" name="points" id="post-points" value="1">
-							<button type="submit" class="btn btn-success">+</button>
+							<button type="submit" class="btn btn-success" name="submitButton" onclick="addPoints('{{post.id}}')">+</button>
 						</form>
 
-						<form action="/rooms/{{post.room}}/posts/{{post.id}}" method="post" class="inline-form">
+						<form action="javascript:void(0)" class="inline-form" id="minusPoints{{post.id}}">
 							<input type="hidden" name="points" id="post-points" value="-1">
-							<button type="submit" class="btn btn-danger">-</button>
+							<button type="submit" class="btn btn-danger" name="submitButton" onclick="minusPoints('{{post.id}}')">-</button>
 						</form>
 					</div>
 				</div>
