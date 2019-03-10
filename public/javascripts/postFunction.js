@@ -1,21 +1,16 @@
-function addPoints(postId) {
-    $("#" + "addPoints" + postId).one("submit", function () {
+function postPoints(postId, submitType) {
+    const postPointsDOM = submitType === "addPoints" ? $("#" + "addPoints" + postId) : $("#" + "minusPoints" + postId);
+    postPointsDOM.one("submit", function () {
         var formData = $(this).serialize();
         $.ajax({
             type: "POST",
             url: "/posts/" + postId,
             data: formData
         }).done(function(data){
-            console.log("add points done with");
-            console.log(data);
             $("#" + "postPoints" + postId).html(`<span class="points-span" id="postPoints${postId}">${data.postPoints} points </span>`);
         }).fail(function() {
-            console.log("add points fail");
+            console.error("post points failed");
         });
     });
 
-}
-
-function minusPoints(postId) {
-    console.log("minus points to: " + postId);
 }

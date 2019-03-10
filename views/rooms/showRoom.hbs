@@ -17,12 +17,12 @@
 					<div class="btn-group btn-group=sm">
 						<form action="javascript:void(0)" class="inline-form" id="addPoints{{post.id}}">
 							<input type="hidden" name="points" id="post-points" value="1">
-							<button type="submit" class="btn btn-success" name="submitButton" onclick="addPoints('{{post.id}}')">+</button>
+							<button type="submit" class="btn btn-success" name="submitButton" onclick="postPoints('{{post.id}}', 'addPoints')">+</button>
 						</form>
 
 						<form action="javascript:void(0)" class="inline-form" id="minusPoints{{post.id}}">
 							<input type="hidden" name="points" id="post-points" value="-1">
-							<button type="submit" class="btn btn-danger" name="submitButton" onclick="minusPoints('{{post.id}}')">-</button>
+							<button type="submit" class="btn btn-danger" name="submitButton" onclick="postPoints('{{post.id}}', 'minusPoints')">-</button>
 						</form>
 					</div>
 				</div>
