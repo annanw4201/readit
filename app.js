@@ -54,7 +54,7 @@ app.use(function(err, req, res, next) {
 // database setup
 var mongoose = require('mongoose');
 var mongoURL = 'mongodb://admin:admin123@ds129085.mlab.com:29085/readit';
-mongoose.connect(mongoURL, { useNewUrlParser: true });
+mongoose.connect(mongoURL, { useNewUrlParser: true, useNewUrlParser: true, useCreateIndex: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error'));
 
