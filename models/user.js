@@ -1,9 +1,11 @@
 const mongoose = require('mongoose');
-var bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
+const Joi = require('joi');
 
 const userSchema = new mongoose.Schema({
-	username: {type: String, required: true},
-	password: {type: String, required: true}
+	username: {type: String, required: true, minlength: 5, maxlength: 20},
+	password: {type: String, required: true, minlength: 5, maxlength: 255},
+	email: {type: String, required: true, unique: true}
 });
 
 // before we save the user data, call this function and hash the user's password
@@ -17,6 +19,38 @@ userSchema.pre('save', function(next) {
 		next();
 	});
 });
+
+userSchema.statics.validate = function(user, next) {
+	const validateSchema = {
+		username: Joi.string().min(5).max(50).required(),
+		password: Joi.string().min(5).max(255).required(),
+		password_confirmation: Joi.string().required().valid(Joi.ref('password')).options({
+			language: {
+				any: {
+					allowOnly: 'Password do not match!'
+				}
+			}
+		}),
+		email: Joi.string().email().required()
+	};
+	const error = Joi.validate(user, validateSchema).error;
+	if (error) {
+		return next(error.details[0]);
+	}
+	User.findOne({$or: [{email: user.email}, {username: user.username}]}, function(err, user) {
+		if (err) {
+			return next(err);
+		}
+		else if (user) {
+			const error = new Error('User already exists with the email or the username!');
+			error.status = 400;
+			next(error, user);
+		}
+		else {
+			next(null, null);
+		}
+	});
+}
 
 userSchema.statics.authenticate = function(username, password, next) {
 	User.findOne({username: username}, function(err, user) {

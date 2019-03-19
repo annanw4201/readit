@@ -22,12 +22,17 @@ router.get('/newUser', function(req, res, next) {
 
 // write username into database
 router.post('/newUser', function(req, res, next) {
-	const user = new User(req.body);
-	user.save(function(err, user) {
-		if (err) {
-			console.error('New user not working');
+	User.validate(req.body, (err, user) => {
+		if (err || user) {
+			return res.send(err.message);
 		}
-		return res.redirect('/users');
+		const newUser = new User(req.body);
+		newUser.save(function(err, user) {
+			if (err) {
+				console.error('New user not created');
+			}
+			return res.redirect('/users');
+		});
 	});
 });
 
