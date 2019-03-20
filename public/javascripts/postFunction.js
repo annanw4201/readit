@@ -12,5 +12,4 @@ function postPoints(postId, submitType) {
             console.error("post points failed");
         });
     });
-
 }
