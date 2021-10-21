@@ -53,8 +53,9 @@ app.use(function(err, req, res, next) {
 
 // database setup
 var mongoose = require('mongoose');
-var mongoURL = 'mongodb://admin:admin123@ds129085.mlab.com:29085/readit';
-mongoose.connect(mongoURL, { useNewUrlParser: true, useNewUrlParser: true, useCreateIndex: true});
+var mongoURL = 'mongodb+srv://DBAdmin:DBAdmin123@cluster0.bt76g.mongodb.net/readit?retryWrites=true&w=majority';
+// var mongoURL = 'mongodb://localhost:27017/readit';
+mongoose.connect(mongoURL, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error'));
 
